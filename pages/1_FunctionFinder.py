@@ -22,6 +22,8 @@ Where:
 Use the sliders below to input the function parameters. The graph will automatically update. For more information on how these parameters change the plot, see the *Math Help Page*.
 """)
 
+st.write("Note: The charge passed plot will not function properly if any section of the ramp is oxidative, keep the curve below zero.")
+
 #adding user inputs
 
 st.header("Parameters")
