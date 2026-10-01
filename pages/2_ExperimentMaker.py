@@ -59,7 +59,7 @@ if "csv_bytes" in st.session_state and "json_file" in st.session_state:
         st.download_button(
             label="Download csv file",
             data=st.session_state["csv_bytes"],
-            file_name=f"{st.session_state['name']}linear_sweep_points.csv",
+            file_name=f"{st.session_state['name']}_linear_sweep_points.csv",
             mime="text/csv")
     with col2:
         st.download_button(
