@@ -35,7 +35,7 @@ name = st.text_input("Enter Experiment Title")
 
 
 obj_plot = sig(use_initial, start_val, A, k, t0, use_cutoff, end_val)
-obj_exp_mkr = squid(obj_plot.A, obj_plot.B,obj_plot.k, obj_plot.t0, obj_plot.tf, n, name) 
+obj_exp_mkr = squid(obj_plot.A, obj_plot.B, obj_plot.t0,obj_plot.k, obj_plot.tf, n, name) 
 
 fig = obj_exp_mkr.plotting()
 
