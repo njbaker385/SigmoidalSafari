@@ -13,9 +13,9 @@ st.write("Use this page to generate the squidstat file.")
 use_initial = st.toggle("Use initial current density instead of B")
 use_cutoff = st.toggle("Use charge passed instead of time")
 
-A = st.slider("A (µA)", 0.0, 100.0, 25.0)
-k = st.slider("k", 0.001, 5.0, 2.0)
-t0 = st.slider("t₀ (min)", 0.0, 10.0, 2.0)
+A = st.number_input("A (µA)", value = 25.0)
+k = st.number_input("k", value = 2.0)
+t0 = st.number_input("t₀ (min)",value =  2.0)
 
 if use_initial:
 	start_val = st.number_input("Initial Current Density (µA)", value=-30.0)
@@ -35,7 +35,8 @@ name = st.text_input("Enter Experiment Title")
 
 
 obj_plot = sig(use_initial, start_val, A, k, t0, use_cutoff, end_val)
-obj_exp_mkr = squid(obj_plot.A, obj_plot.B, obj_plot.t0,obj_plot.k, obj_plot.tf, n, name) 
+print(f"A = {obj_plot.A} \n B = {obj_plot.B} \n t0 = {obj_plot.t0} \n k = {obj_plot.k} \n tf = {obj_plot.tf}")
+obj_exp_mkr = squid(obj_plot.A, obj_plot.B, obj_plot.t0, obj_plot.k, obj_plot.tf, n, name) 
 
 fig = obj_exp_mkr.plotting()
 
