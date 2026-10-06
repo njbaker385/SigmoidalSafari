@@ -13,30 +13,34 @@ st.write("Use this page to generate the squidstat file.")
 use_initial = st.toggle("Use initial current density instead of B")
 use_cutoff = st.toggle("Use charge passed instead of time")
 
-A = st.number_input("A (µA)", value = 25.0)
-k = st.number_input("k", value = 2.0)
-t0 = st.number_input("t₀ (min)",value =  2.0)
+A = st.number_input("A (µA)", value = 25.0, step=1e-6, format="%.6f")
+k = st.number_input("k", value = 3.3667, step=1e-6, format="%.6f")
+t0 = st.number_input("t₀ (min)",value =  1.4, step=1e-6, format="%.6f")
 
 if use_initial:
-	start_val = st.number_input("Initial Current Density (µA)", value=-30.0)
+	start_val = st.number_input("Initial Current Density (µA)", value=-30.0,
+                                step=1e-6, format="%.6f")
 	
 else:
-	start_val = st.number_input("B Value (µA)", value=-30.0)
+	start_val = st.number_input("B Value (µA)", value=-30.0,
+                                 step=1e-6, format="%.6f")
 
 
 if use_cutoff:
-	end_val = st.number_input("Final Charge Passed (mC)", value=3.0)
+	end_val = st.number_input("Final Charge Passed (mC)", value=3.0,
+                              step=1e-6, format="%.6f")
 	
 else:
-	end_val = st.number_input("Final Time (min)", 1.0, 30.0, 5.0)
+	end_val = st.number_input("Final Time (min)", value = 5.0,
+                              step=1e-6, format="%.6f")
 
-n = st.slider("Number of Linear Sweeps", 10,100,50,1)
+n = st.number_input("Number of Linear Sweeps", value = 50)
 name = st.text_input("Enter Experiment Title")
 
 
 obj_plot = sig(use_initial, start_val, A, k, t0, use_cutoff, end_val)
-print(f"A = {obj_plot.A} \n B = {obj_plot.B} \n t0 = {obj_plot.t0} \n k = {obj_plot.k} \n tf = {obj_plot.tf}")
-obj_exp_mkr = squid(obj_plot.A, obj_plot.B, obj_plot.t0, obj_plot.k, obj_plot.tf, n, name) 
+obj_exp_mkr = squid(obj_plot.A, obj_plot.B, obj_plot.t0, obj_plot.k, obj_plot.tf, int(n), name) 
+
 
 fig = obj_exp_mkr.plotting()
 
@@ -47,6 +51,8 @@ st.pyplot(fig)
 
 # When Calculate is pressed, generate files and store them
 if st.button("Calculate"):
+    print(f"A = {obj_plot.A} \n B = {obj_plot.B} \n t0 = {obj_plot.t0} \n k = {obj_plot.k} \n tf = {obj_plot.tf}")
+
     df = obj_exp_mkr.making_csv()
     st.session_state["csv_bytes"] = df.to_csv(index=False).encode("utf-8")
     st.session_state["json_file"] = obj_exp_mkr.making_json()
