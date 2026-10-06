@@ -101,7 +101,7 @@ class squid:
 							"maximum-voltage-units": "V",
 							"minimum-voltage": "",
 							"minimum-voltage-units": "V",
-							"sampling-interval": "0.01",
+							"sampling-interval": "0.005",
 							"sampling-interval-units": "s"
 						}
 					}
@@ -138,7 +138,7 @@ class squid:
 					"quiet-sampling-interval-units": "s",
 					"quiet-time": "",
 					"quiet-time-units": "s",
-					"sampling-interval": "0.01",
+					"sampling-interval": "0.005",
 					"sampling-interval-units": "s",
 					"starting-current": f"{float(curr_i):.12f}",
 					"starting-current-units": "uA",
