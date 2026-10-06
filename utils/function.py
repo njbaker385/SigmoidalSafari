@@ -14,7 +14,7 @@ class sigmoidal_plot:
 		#defining inputs within the class 
 		self.A = A
 		self.k = k 
-		self.t0= t0
+		self.t0 = t0
 
 		self.B = self.B_finder(start_switch, start_val) 
 		self.tf = self.finalt_finder(end_switch, end_val)
@@ -23,7 +23,10 @@ class sigmoidal_plot:
 		#making line
 		self.times = np.linspace(0,self.tf,1000)
 		self.line = self.sigmoidal_function(self.times)
-		self.charges = self.charge_finder(self.times)
+		self.charges = []
+		for time in self.times:
+			q = self.charge_finder(time)
+			self.charges.append(q)
 
 		self.finalTime = self.times[-1]
 		self.finali = self.line[-1]
@@ -60,10 +63,24 @@ class sigmoidal_plot:
 		return (frac + self.B)
 
 	def charge_finder(self, tf):
-		term_f = (tf - self.t0) + np.log(1 + np.exp(-self.k*(tf - self.t0)))
-		term_0 = (-self.t0) + np.log(1 + np.exp(self.k*self.t0))
+		#found using ChatGPT --> still need to solve myself
+		term_f = (
+			self.k * (tf - self.t0)
+			+ np.logaddexp(0, -self.k * (tf - self.t0))
+		)
+		#np.logaddexp = np.log(1 + np.exp(x)), specific function for this type of expression
 
-		return abs(((self.A/self.k)*(term_f - term_0) + self.B*tf)*0.06) #should return mC
+		term_0 = (
+			-self.k * self.t0
+			+ np.logaddexp(0, self.k * self.t0)
+		)
+
+		charge = (
+			(self.A / self.k) * (term_f - term_0)
+			+ self.B * tf
+		)
+
+		return abs(charge) * 0.06 #should return mC 
 
 	def plotting(self):
 		fig, (ax1, ax2) = plt.subplots(1,2, figsize=(12,8))
