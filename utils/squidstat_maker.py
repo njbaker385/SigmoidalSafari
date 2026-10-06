@@ -130,7 +130,7 @@ class squid:
 					"Maximum-voltage-units": "V",
 					"Minimum-voltage": "",
 					"Minimum-voltage-units": "V",
-					"alpha-factor": "75",
+					"alpha-factor": "100",
 					"append--data-to-csv-file-checkbox": "Yes",
 					"ending-current": f"{float(curr_f):.12f}",
 					"ending-current-units": "uA",
@@ -179,6 +179,8 @@ class squid:
 		ax2.legend(title=f"Final Q passed = {self.finalQ:.4f} mC", title_fontsize=14, fontsize=12)
 
 		return fig 
+	
+	
 
 
 # obj = squid(25,-30,1.4,1.73,5,50,"example")
