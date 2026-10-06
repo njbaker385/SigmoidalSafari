@@ -10,13 +10,13 @@ import random, json, string
 
 class squid:
 
-	def __init__(self,A,B,t0,k,tf,n,name):
+	def __init__(self,A,B,t0,k,tf,n,name): #n passed in as integer
 		self.A, self.B, self.t0, self.k, self.tf = A,B,t0,k,tf 
 		self.n = n # number of linear sweeps used in the experiment
 		self.name = name # used for file titles later
 
 		#making lists for the calculated values
-		self.time_points = np.linspace(0,self.tf,int(self.n))
+		self.time_points = np.linspace(0,self.tf,self.n)
 		self.current_points = [self.ramp(t) for t in self.time_points]
 		
 		self.charges = [0]
@@ -45,7 +45,7 @@ class squid:
 	def trap_charge(self,t1,i1,t2,i2):
 		# calculating the expected charge from the individual linear sweeps
 		h = (t2 - t1)
-		area = (abs(i1)+abs(i2))*h*0.5 #trap area 
+		area = (abs(i1)+abs(i2))*h/2 #trap area 
 		q = area * 6e-5 #µA*min -->A*sec
 	
 		return q*1000 #should return mC
