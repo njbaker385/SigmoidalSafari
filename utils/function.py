@@ -8,11 +8,11 @@ from scipy.optimize import brentq
 
 
 
-class sigmoidal_plot:
+class sig:
 
-	def __init__(self, start_switch, start_val, A, k, t0, end_switch, end_val):
+	def __init__(self, current_start, current_end, k, t0, end_switch, end_val):
 		#defining inputs within the class 
-		self.A = A
+		self.A = self.A_finder(current_start, current_end)
 		self.k = k 
 		self.t0 = t0
 
@@ -31,7 +31,9 @@ class sigmoidal_plot:
 		self.finalTime = self.times[-1]
 		self.finali = self.line[-1]
 		self.finalQ = self.charges[-1]
-		
+
+	def A_finder(self, i_0, i_f):
+		return (abs(i_0) - abs(i_f))
 
 
 	def B_finder(self, switch, start):
