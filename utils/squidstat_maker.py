@@ -15,7 +15,7 @@ class squid:
 		self.n = n # number of linear sweeps used in the experiment
 		self.name = name # used for file titles later
 
-		self.slope_threshold = 0.015#µA/sec
+		self.slope_threshold = 0.025#µA/sec
 
 		#making lists for the calculated values
 		self.time_points = np.linspace(0,self.tf,self.n)
