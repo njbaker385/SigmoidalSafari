@@ -12,12 +12,10 @@ class sigmoidal_plot:
 
 	def __init__(self, current_start, current_end, k, t0, end_switch, end_val):
 		#defining inputs within the class 
-		self.A = self.A_finder(current_start, current_end)
 		self.k = k 
 		self.t0 = t0
-	
-
 		self.B = self.B_finder(current_start) 
+		self.A = self.A_finder(current_start, current_end)
 		self.tf = self.finalt_finder(end_switch, end_val)
 		
 
