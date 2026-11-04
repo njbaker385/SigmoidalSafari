@@ -8,15 +8,16 @@ from scipy.optimize import brentq
 
 
 
-class sig:
+class sigmoidal_plot:
 
 	def __init__(self, current_start, current_end, k, t0, end_switch, end_val):
 		#defining inputs within the class 
 		self.A = self.A_finder(current_start, current_end)
 		self.k = k 
 		self.t0 = t0
+	
 
-		self.B = self.B_finder(start_switch, start_val) 
+		self.B = self.B_finder(current_start) 
 		self.tf = self.finalt_finder(end_switch, end_val)
 		
 
@@ -36,13 +37,10 @@ class sig:
 		return (abs(i_0) - abs(i_f))
 
 
-	def B_finder(self, switch, start):
-		if not switch:
-			return start #start is the B value
-		else:
-			#start is initial current density 
-			frac = self.A/(1+np.exp(self.k*self.t0))
-			return start - frac
+	def B_finder(self, start):
+		#start is initial current density 
+		frac = self.A/(1+np.exp(self.k*self.t0))
+		return start - frac
 
 	def finalt_finder(self, switch, val):
 		
