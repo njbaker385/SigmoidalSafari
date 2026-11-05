@@ -14,8 +14,8 @@ class sigmoidal_plot:
 		#defining inputs within the class 
 		self.k = k 
 		self.t0 = t0
-		self.B = self.B_finder(current_start) 
 		self.A = self.A_finder(current_start, current_end)
+		self.B = self.B_finder(current_start) 
 		self.tf = self.finalt_finder(end_switch, end_val)
 		
 
